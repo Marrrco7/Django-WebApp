@@ -2,18 +2,17 @@
 Overview
 --------
 
-This project is a dynamic web application developed using Django, allowing for easy addition, update, display, and deletion of game information. The application integrates with a PostgreSQL database to efficiently store and retrieve game data.
+Dynamic web application developed using Django, allowing for easy addition, update, display, and deletion of game information. The application integrates with a PostgreSQL database to efficiently store and retrieve game data for a videogames company (Threading Labs).
 
 Table of Contents
 -----------------
 
 - Project Structure
-- Features
-- Analysis and Design
+  - Features
+  - Analysis and Design
   - Challenge Overview
   - Solution Architecture
-  - Functional Requirements
-  - Non-Functional Requirements
+  - Functionalities
   - System Architecture
   - Database Design
 
@@ -21,68 +20,62 @@ Project Structure
 -----------------
 
 
-
-
-Features
+Relevatn Features
 --------
 
-- **CRUD Operations**: Create, Read, Update, and Delete video game entries.
-- **User Authentication**: Secure login and logout functionalities.
-- **Permissions**: Restrict access to certain views based on user permissions.
-- **Responsive Design**: User interface built with Bootstrap for responsiveness.
-- **Search and Filter**: *(Optional feature)* Search games by title, genre, etc.
+- **CRUD functionalities**: Create, Read, Update, and Delete video game entries.
+- **User Authentication**: Secure login and logout functionalities for staff members.
+- **Permissions**: Restrict access to certain views only to users with certain permissions.
+- **Responsive Design**: Easy to use UI made with Bootstrap4.
+
 
 Analysis and Design
 -------------------
 
 ### Solution Architecture
 
-The architecture consists of the following components:
+![image](https://github.com/user-attachments/assets/496a4afa-7767-429f-871e-cc012faa441a)
 
-- **Functional Web Application**: A Django web application that allows management of a video game catalog with CRUD functionalities. It defines a `VideoGame` model to represent each video game, including fields for the game's title, genre, release date, and a brief description.
-- **Database Integration**: Integration with a PostgreSQL database, ensuring efficient data storage and retrieval for game information.
+The architecture composed by these following components:
 
-### Functional Requirements
+- **Web Application**: The project is build as a Django webApp that serves as a backend. It handles data validation, business logic
+  and HTTP requests by the users thanks to the Django MVT architecturarl pattern:
+  
+  - **Models**: Define the structure of the database (VideoGame and Genre models).
+  - **Views**: Handle the business logic and provides posibility to interact with the models.
+  - **Templates**: Render the user interface using HTML and Bootstrap4.
 
-- **Add New Game**: Users can add new video games by specifying the title, genre, release date, and a brief description.
-- **Edit Game Details**: Users can update existing game information.
-- **Delete Game**: Users can remove games from the catalog.
-- **View Game List**: Users can view a list of all games in the catalog.
-- **User Authentication**: Users must log in to access the application.
-- **Permissions**: Only authorized users can add, edit, or delete games.
-
-### Non-Functional Requirements
-
-- **Performance**: The application should load pages within 2 seconds.
-- **Scalability**: The system should handle up to 100 concurrent users.
-- **Security**: Implement proper authentication and authorization mechanisms.
-- **Usability**: The interface should be intuitive and easy to navigate.
-- **Maintainability**: Code should follow best practices for readability and maintainability.
-
-### System Architecture
-
-The application follows the Model-View-Template (MVT) architectural pattern provided by Django.
-
-- **Models**: Define the structure of the database (VideoGame and Genre models).
-- **Views**: Handle the business logic and interact with the models.
-- **Templates**: Render the user interface using HTML and Bootstrap.
-
-### Database Design
-
-A PostgreSQL database is used to store game information.
+- **Database**: The project uses a relational postgre SQL database for data storage and efficient retrieving of information. The Django App interacts with this database
+  through the ORM (Object Relational Mapper), making it easier to perform CRUD operations. The columns of the database are defined in the Django models.py: Title, Release date, Description,
+  and Genre. The database design is composed by two tables: Videogame and Genre, implemented with a one to many relationship (a genre can have multiple games, but each genre's game must be only one).
 
 **Tables**:
 
 1. **Genre**
    - `id`: Primary key
-   - `title`: String (max 50 characters)
+   - `title`: String (50 chars)
 
 2. **VideoGame**
    - `id`: Primary key
-   - `title`: String (max 100 characters)
+   - `title`: String (100 chars)
    - `release_date`: Date
-   - `description`: String (max 100 characters)
-   - `genre_id`: Foreign key referencing `Genre`
+   - `description`: String (100 characters)
+   - `genre_id`: Foreign key referencing the `Genre` table
+  
+  
+- **Local Environment**: The application is running in a local server allowing staff members to access the WebApp by connecting to the IP address of the local machine.
+
+### Functionalities
+
+- **Game Adding**: Users can add new video games by filling the form rendered by the views.py
+- **Details Editing**: Users can update existing game information.
+- **Game Deletion**: Possibility to easily remove games from the catalog (permission required).
+- **View Game List**: Users can view a list of all games in the catalog.
+- **User Authentication**: Users must log in to access the application.
+- **Permissions**: Only authorized users can add, edit, or delete games (Admins and managers).
+- **Security**: Implement proper authentication and authorization mechanisms (CSRF tokens, loggin authentication).
+- **Usability**: UI intuitive and easy to navigate, designed for staff memebers with non-technical backround.
+
 
 ### User Interface Design
  **Base Template**: Includes navigation and common UI elements.
